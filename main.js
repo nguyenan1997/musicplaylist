@@ -13,28 +13,64 @@ const background = document.getElementById('bg-img');
 const music = new Audio();
 const songs = [
     {
-        path: 'musics/emcuangayhomqua.mp3',
-        displayName: 'Em Của Ngày Hôm Qua',
-        cover: 'images/emcuangayhomqua.png',
+        path: 'musics/tu-su.mp3',
+        displayName: 'Tự Sự (Qua Bển Làm Chi OST)',
+        cover: 'images/tu-su.jpg',
+        artist: 'Orange',
+    },
+    {
+        path: 'musics/motdoi.mp3',
+        displayName: 'Một Đời',
+        cover: 'images/mot-doi.jpg',
+        artist: 'm14 Casper, Bon Nghiêm, buitruonglinh',
+    },
+    {
+        path: 'musics/dunglamtraitimanhdau.mp3',
+        displayName: 'Đừng Làm Trái Tim Anh Đau',
+        cover: 'images/dunglamtraitimanhdau.jpg',
         artist: 'Sơn Tùng MTP',
     },
     {
-        path: 'musics/nangamxadan.mp3',
-        displayName: 'Nắng Ấm Xa Dần',
-        cover: 'images/emcuangayhomqua.png',
-        artist: 'Sơn Tùng MTP',
+        path: 'musics/timmotnguoinhuthe.mp3',
+        displayName: 'Tìm một người như thế',
+        cover: 'images/timmotnguoinhuthe.jpg',
+        artist: 'Nguyễn Ngọc Anh',
     },
     {
-        path: 'musics/conmuangangqua2.mp3',
-        displayName: 'Cơn Mưa Ngang Qua 2',
-        cover: 'images/emcuangayhomqua.png',
-        artist: 'Sơn Tùng MTP',
+        path: 'musics/baotienmotmobinhyen.mp3',
+        displayName: 'Bao Tiền Một Mớ Bình Yên',
+        cover: 'images/baotienmotmobinhyen.jpg',
+        artist: '14 Casper & Bon Nghiêm (Official)(Track 09 - Album `SỐ KHÔNG`)',
     },
     {
-        path: 'musics/emdungdi.mp3',
-        displayName: 'Em Đừng Đi',
-        cover: 'images/emcuangayhomqua.png',
-        artist: 'Sơn Tùng MTP',
+        path: 'musics/ngoinhahanhphuc.mp3',
+        displayName: 'Ngôi Nhà Hạnh Phúc',
+        cover: 'images/ngoinhahanhphuc.jpg',
+        artist: 'Thuỳ Tiên',
+    },
+    {
+        path: 'musics/neulucdo.mp3',
+        displayName: 'Nếu Lúc Đó',
+        cover: 'images/neulucdo.jpg',
+        artist: 'tlinh',
+    },
+    {
+        path: 'musics/tinhyeuvinhvienkhongmatdi.mp3',
+        displayName: 'Tình Yêu Vĩnh Viễn Không Mất Đi',
+        cover: 'images/tinhyeuvinhvienkhongmatdi.jpg',
+        artist: 'Thiện Y Thuần',
+    },
+    {
+        path: 'musics/tinhcubaogiocungtothon.mp3',
+        displayName: 'Tình Cũ Bao Giờ Cũng Tốt Hơn',
+        cover: 'images/tinhcubaogiocungtothon.jpg',
+        artist: 'Dương Hoàng Yến',
+    },
+    {
+        path: 'musics/khongphaiemdungkhong.mp3',
+        displayName: 'Không Phải Em Đúng Không',
+        cover: 'images/khongphaiemdungkhong.jpg',
+        artist: 'Dương Hoàng Yến',
     }
 ];
 
@@ -73,7 +109,6 @@ function loadMusic(song){
     background.src = song.cover;
 }
 
-
 function changeMusic(direction){
     musicIndex = (musicIndex + direction + songs.length) % songs.length;
     loadMusic(songs[musicIndex]);
@@ -82,17 +117,17 @@ function changeMusic(direction){
 
 
 function updateProgressBar(){
-    const { duration,currentTime } = music;
+    const {duration,currentTime} = music;
     const progressPercent = (currentTime/duration) * 100;
     progress.style.width = `${progressPercent}%`;
-    const formatTime = (time) => String(Math.floor(time).padStart(2, '0'));
-    durationEl.textContent = `${formatTime(duration/ 60)} : ${formatTime(duration / 60)}`;
-    currentTimeEl.textContent = `${formatTime(currentTime / 60)}:${formatTime(currentTime % 60)}`;
+    const formatTime = (time) => String(Math.floor(time)).padStart(2,'0');
+    durationEl.textContent = `${formatTime(duration/60)} : ${formatTime(duration%60)}`;
+    currentTimeEl.textContent = `${formatTime(currentTime/60)} : ${formatTime(currentTime % 60)}`;
 }
 
-function setProgressBar(e){
+function setProgressBar(a){
     const width = playerProgress.clientWidth;
-    const clickX = e.offsetX;
+    const clickX = a.offsetX;
     music.currentTime = (clickX / width) * music.duration;
 }
 playBtn.addEventListener('click', togglePlay);
@@ -102,9 +137,6 @@ music.addEventListener('ended', () => changeMusic(1));
 music.addEventListener('timeupdate', updateProgressBar);
 playerProgress.addEventListener('click',setProgressBar);
 loadMusic(songs[musicIndex]);
-
-
-
 
 
 
